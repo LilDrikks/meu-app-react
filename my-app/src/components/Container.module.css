@@ -1,0 +1,6 @@
+.containerApp{
+    border: 2px solid greenyellow;
+    min-width: 500px;
+    height: 400px;
+    padding: 20px;
+}
