@@ -1,10 +1,10 @@
 import styles from './Container.module.css'
-const Container = ({tasks, children}) => {
+const Container = ({children}) => {
     return ( 
         <div className={styles.containerApp}>
             {children}
         </div>
-     );
+     )
 }
  
-export default Container;
+export default Container

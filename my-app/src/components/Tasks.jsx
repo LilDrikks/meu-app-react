@@ -1,12 +1,13 @@
 import Task from './Task'
-const Tasks = ({tasks}) => {
+
+const Tasks = ({tasks, handleTaskClick, handleDeleteTask}) => {
     return ( 
-        <>
-        {tasks.map(task => <>
-            <Task task={task} />
-             </>)}
-        </>
-     );
+        <div>
+            {tasks.map(task => ( 
+                <Task task={task} handleTaskClick={handleTaskClick} handleDeleteTask={handleDeleteTask}  />
+            ) )}
+        </div>
+     )
 }
  
-export default Tasks;
+export default Tasks

@@ -1,33 +1,63 @@
-import './App.css';
-import Container from './components/Container';
+import './App.css'
+import Container from './components/Container'
 import {useState} from 'react'
-import Tasks from './components/Tasks';
-import AddTask from './components/AddTask';
-
+import Tasks from './components/Tasks'
+import AddTask from './components/AddTask'
+import {v4 as uuidv4} from 'uuid'
 function App() {
-  const [tasks, setTasks] = useState([
-    {id:1, title:'Learning React', state:true},
-    {id:2, title:'Learning book React', state:true},
-    {id:3, title:'Pratice React', state:false},
-    {id:4, title:'Pratice English', state:false},
-  ])
-
+const [tasks, setTasks] = useState([
+    {id:uuidv4(), title:'Task1', state: false},
+    {id:uuidv4(), title:'Task2', state: false},
+    {id:uuidv4(), title:'Task3', state: false},
+    {id:uuidv4(), title:'Task4', state: false},
+    {id:uuidv4(), title:'Task5', state: false}
+])
   //essa é a função passada como props para o AddTask
   //ela recebe o parametro taskTitle para injetar o titulo no useState tasks
-  const handleTaskAddition = (taskTitle) => {
+const handleTaskAddition = (taskTitle) => {
     
     //aqui a variavel newTask recebe o array de tasks mais o novo objeto com seus valores
-    const newTask = [...tasks, 
+    const newTasks = [...tasks, 
       {
-        id: Math.random(10),
+        id:uuidv4(),
         title: taskTitle,
         state:false
       }]
-      
-      //chamando setTasks(newTask) estamos empurrando o novo valor de um array para o state de tasks
-      setTasks(newTask)
-      console.log(tasks)
-  }
+      //chamando setTasks(newTasks) estamos empurrando o novo valor de um array para o state de tasks
+      setTasks(newTasks)
+      console.log(newTasks)
+}
+
+
+//Função para apagar um item do tasks que recebe taskId vindo do botão em Task que recebe a prop task especifica para ser removida
+const handleDeleteTask = (taskId) => {
+        //busca no tasks o index do item taskId e aramazena na constante index
+        const index = tasks.indexOf(taskId)
+        //condição se index for verdadeiro em uma array
+        if(index > -1){
+          //adiciona o valor de tasks removendo o item do index e atribuindo o novo tasks a newTasks
+          const newTasks = tasks.splice(index, 1)
+          //setando newTasks ao useState de tasks
+          setTasks(newTasks)
+        }
+ }
+
+
+//a função recebe o parametro id para ter certeza do item que esta sendo modificado
+const handleTaskClick = (taskId) => {
+    //chama um map no useSate tasks mapeando cada item e adicinando condicionalmente em um novo array
+      const newTasks = tasks.map(task => { 
+        //condição que verifica o id do item clicado e altera sua propriedade state para o valor contrario false/true true/false
+        if (task.id === taskId) return { ...task, state: !task.state}
+        //caso o valor do id não seja encontrado no array tasks ira retornar task normal sem alteração e não execulta a linha de baixo
+        return task
+    })
+    //caso o valor do id seja encontrado no array ele modifica tasks injeta seu valor na constante newTasks e seta com
+    //setTasks( a constante newTasks )
+    setTasks(newTasks)
+} 
+
+
 
   return (
     <div className="App">
@@ -36,10 +66,9 @@ function App() {
       {/* passando uma props valor função para o component AddTask*/}
       <AddTask handleTaskAddition={handleTaskAddition} />
       {/* passando uma props valor useState para o component Tasks*/}
-      <Tasks tasks={tasks}/>
+      <Tasks tasks={tasks} handleTaskClick={handleTaskClick} handleDeleteTask={handleDeleteTask}/>
     </Container>
     </div>
-  );
+  )
 }
-
-export default App;
+export default App

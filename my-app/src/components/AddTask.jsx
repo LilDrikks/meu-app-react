@@ -1,6 +1,6 @@
 import styles from './AddTask.module.css'
-import AddTaskButton from './AddTaskButton';
-import { useState } from "react";
+import AddTaskButton from './AddTaskButton'
+import { useState } from "react"
 
 //recebendo a função handleTaskAddition que altera o tasks do component App
 const AddTask = ({handleTaskAddition}) => {
@@ -17,9 +17,14 @@ const AddTask = ({handleTaskAddition}) => {
 
     //a função que irá adicionar a tarefa recebe outra função
     const handleClickAddTask = () => {
+        if(inputData === ''){
+            return
+        }
         //essa outra função por sua vez vem como propriedade do App
         //e passa o parametro do useState inputData(valor que esta no input)
         handleTaskAddition(inputData)
+        //limpando o input apois o click pois o value é o mesmo que o inputData
+        setInputData('')
     }
     return ( 
         <div className={styles.addTask}>
@@ -43,7 +48,7 @@ const AddTask = ({handleTaskAddition}) => {
             </div>
 
         </div>
-     );
+     )
 }
  
-export default AddTask;
+export default AddTask
