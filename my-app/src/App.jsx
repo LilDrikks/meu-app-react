@@ -35,7 +35,7 @@ const handleDeleteTask = (taskId) => {
         const index = tasks.indexOf(taskId)
         //condição se index for verdadeiro em uma array
         if(index > -1){
-          //adiciona o valor de tasks removendo o item do index e atribuindo o novo tasks a newTasks
+          //o valor de tasks removendo o item do index é atribuido o novo tasks a newTasks
           const newTasks = tasks.splice(index, 1)
           //setando newTasks ao useState de tasks
           setTasks(newTasks)
