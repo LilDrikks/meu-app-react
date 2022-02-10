@@ -8,20 +8,22 @@
     border-radius: 5px;
     margin-bottom: 10px;
     cursor: pointer;
-    flex-wrap: wrap;
-    
-    
 }
 .title{
     text-align: left;
-    width: 350px;
+    width: 60%;
+    flex:4;
     word-wrap:break-word;
+    padding-right: 50px;
 }
 .buttonClose {
     color:red;
     margin-left: 10px;
+    flex: 1;
+    
 }
 .buttonInfo {
     color:blue;
     margin-left: 10px;
+    flex:1;
 }

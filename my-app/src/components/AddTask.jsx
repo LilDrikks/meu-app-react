@@ -1,6 +1,6 @@
 import styles from './AddTask.module.css'
 import AddTaskButton from './AddTaskButton'
-import { useState } from "react"
+import { useState } from 'react'
 
 //recebendo a função handleTaskAddition que altera o tasks do component App
 const AddTask = ({handleTaskAddition}) => {
@@ -35,7 +35,7 @@ const AddTask = ({handleTaskAddition}) => {
             <input
                 value={inputData}
                 onChange={handleInputChange}
-                type="text"
+                type='text'
                 className={styles.addTaskInput}
             />
 

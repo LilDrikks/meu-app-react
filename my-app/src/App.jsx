@@ -7,6 +7,7 @@ import Header from './components/Header'
 
 import {useState} from 'react'
 import {v4 as uuidv4} from 'uuid'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 function App() {
 const [tasks, setTasks] = useState([
@@ -61,19 +62,16 @@ const handleTaskClick = (taskId) => {
     setTasks(newTasks)
 } 
 
-
-
   return (
-    <div className="App">
-      
-    <Container>
-    <Header />
-      {/* passando uma props valor função para o component AddTask*/}
-      <AddTask handleTaskAddition={handleTaskAddition} />
-      {/* passando uma props valor useState para o component Tasks*/}
-      <Tasks tasks={tasks} handleTaskClick={handleTaskClick} handleDeleteTask={handleDeleteTask}/>
-    </Container>
-    </div>
+        <div className="App">
+        <Container>
+          <Header />
+            {/* passando uma props valor função para o component AddTask*/}
+            <AddTask handleTaskAddition={handleTaskAddition} />
+            {/* passando uma props valor useState para o component Tasks*/}
+            <Tasks tasks={tasks} handleTaskClick={handleTaskClick} handleDeleteTask={handleDeleteTask}/>
+        </Container>
+      </div> 
   )
 }
 export default App
