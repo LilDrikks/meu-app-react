@@ -1,6 +1,12 @@
 .containerApp{
-    border: 2px solid greenyellow;
-    min-width: 500px;
-    height: 400px;
+    border: 2px solid  chartreuse;
+    max-width: 600px;
+    min-height: 400px;
     padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.containerApp h1{
+    margin: 0;
 }

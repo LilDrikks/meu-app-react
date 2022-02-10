@@ -61,8 +61,9 @@ const handleTaskClick = (taskId) => {
 
   return (
     <div className="App">
-      <h1>Tasks</h1>
+      
     <Container>
+    <h1>Tarefas</h1>
       {/* passando uma props valor função para o component AddTask*/}
       <AddTask handleTaskAddition={handleTaskAddition} />
       {/* passando uma props valor useState para o component Tasks*/}
