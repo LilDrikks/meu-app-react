@@ -1,11 +1,11 @@
 .addTask {
     margin: 15px 0px;
-    width: 90%;
+    width: 100%;
     display: flex;
 }
 .addTaskInput{
     height: 40px;
-    padding: 0 10px;
+    
     border-radius: 5px;
     border: none;
     flex: 2;
@@ -14,8 +14,7 @@
     font-size: 16px;
 }
 .addTaskButton{
-    height: 40px;
-    padding: 0 10px;
+    height: 40px;  
     border-radius: 5px;
     border: none;
     width: 100%;
