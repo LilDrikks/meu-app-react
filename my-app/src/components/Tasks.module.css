@@ -17,12 +17,11 @@
     width: 350px;
     word-wrap:break-word;
 }
-.button {
-    width: 25px;
-    height: 25px;
-    border-radius: 60px;
-    border:1px solid red;
-    background-color: black;
-    color:white;
+.buttonClose {
+    color:red;
+    margin-left: 10px;
+}
+.buttonInfo {
+    color:blue;
     margin-left: 10px;
 }

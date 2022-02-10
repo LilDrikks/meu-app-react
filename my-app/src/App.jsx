@@ -1,9 +1,13 @@
 import './App.css'
-import Container from './components/Container'
-import {useState} from 'react'
+
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
+import Container from './components/Container'
+import Header from './components/Header'
+
+import {useState} from 'react'
 import {v4 as uuidv4} from 'uuid'
+
 function App() {
 const [tasks, setTasks] = useState([
     {id:uuidv4(), title:'Task1', state: false},
@@ -63,7 +67,7 @@ const handleTaskClick = (taskId) => {
     <div className="App">
       
     <Container>
-    <h1>Tarefas</h1>
+    <Header />
       {/* passando uma props valor função para o component AddTask*/}
       <AddTask handleTaskAddition={handleTaskAddition} />
       {/* passando uma props valor useState para o component Tasks*/}

@@ -1,5 +1,7 @@
+import {CgClose, CgInfo} from 'react-icons/cg'
 
 import styles from './Tasks.module.css'
+
 const Task = ({task, handleTaskClick, handleDeleteTask}) => {
     return ( 
         <>
@@ -9,7 +11,8 @@ const Task = ({task, handleTaskClick, handleDeleteTask}) => {
                 style={task.state ? {borderLeft: '4px solid chartreuse'}: {borderRight: '4px solid  red'}}
                 onClick={() => handleTaskClick(task.id)}>
                 <div className={styles.title}>{task.title}</div>
-               <button className={styles.button} onClick={() => handleDeleteTask(task)}>X</button>
+                <CgInfo className={styles.buttonInfo}  />
+                    <CgClose  className={styles.buttonClose} onClick={() => handleDeleteTask(task)} />
             </div>
               {/*eventListener onClick recebe uma função que exaculta a função pois não podemos passar uma função com parametro diretamente */}
               {/*a fução chamada é a handleTaskClick(com a prop task.id) que será o id exato do item que esta sendo renderizado e clicado*/}
