@@ -1,11 +1,11 @@
-.containerApp{
-    border: 2px solid  chartreuse;
-    max-width: 310px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    margin-top: 20px;
+.containerApp {
+  border: 2px solid chartreuse;
+  max-width: 310px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 20px;
 }
-.containerApp h1{
-    margin: 0;
+.containerApp h1 {
+  margin: 0;
 }

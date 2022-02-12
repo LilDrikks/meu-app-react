@@ -1,0 +1,15 @@
+.taskInfo {
+        width: 100%;
+        background-color: gray;
+        padding: 10px 0px 10px 0px ;
+        border-radius: 5px;
+        margin-top: 20px;
+}
+.taskInfo h2, p{
+        color:white;
+        margin-top: 0;
+}
+
+.buttonGoBack {
+        margin-top: 10px;
+}
