@@ -14,6 +14,7 @@ const reqApi = async () => {
   const fetchNodeApiJson = await fetchNodeApi.json()
   setTasks(...tesks, fetchNodeApiJson)
 }
+reqApi()
 
 function App() {
   const [tasks, setTasks] = useState([
