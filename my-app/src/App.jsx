@@ -9,6 +9,12 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+const reqApi = async () => {
+  const fetchNodeApi = await fetch('http://15.228.185.140:3333/person/people')
+  const fetchNodeApiJson = await fetchNodeApi.json()
+  setTasks(...tesks, fetchNodeApiJson)
+}
+
 function App() {
   const [tasks, setTasks] = useState([
     { id: uuidv4(), title: "Task1", state: false },
