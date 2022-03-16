@@ -25,6 +25,25 @@ useEffect(() => {
     return () => {
     };
 }, []);
+useEffect(() => {
+  const reqApi = async () => {
+    const requestOptions = {
+      method: 'POST',
+      headers:{ 
+        'Content-Type': 'application/json',
+        'Authorization': '5fd1be56-a21a-4c91-aa31-a9428c0e2d6f',
+        'My-Custom-Header': 'foobar'
+    },
+      body: { "name": "Rodrigo", "salary": 0, "approved": true }
+    }
+    const fetchNodeApi = await fetch('http://15.228.185.140:3333/person', requestOptions)
+    const fetchNodeApiJson = await fetchNodeApi.json()
+    console.log(fetchNodeApiJson)
+  }
+  reqApi()
+  return () => {
+  };
+}, []);
 
   //essa é a função passada como props para o AddTask.
   //ela recebe o parametro taskTitle para injetar o titulo no useState tasks.

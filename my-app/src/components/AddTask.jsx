@@ -18,6 +18,7 @@ const AddTask = ({ handleTaskAddition }) => {
     if (inputData === "") {
       return;
     }
+
     //essa outra função por sua vez vem como propriedade do App
     //e passa o parametro do useState inputData(valor que esta no input)
     handleTaskAddition(inputData);

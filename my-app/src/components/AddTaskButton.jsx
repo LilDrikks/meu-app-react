@@ -1,12 +1,6 @@
 import styles from "./AddTask.module.css";
 
-fetch("http://15.228.185.140:3333/person/",
-{
-    method: "POST",
-    body: {"name":"teste", "salary": 0}
-})
-.then(function(res){ console.log(res) })
-.catch(function(res){ console.log(res) })
+
 
 const AddTaskButton = ({ children, onClick }) => {
   return (
