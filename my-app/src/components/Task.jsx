@@ -15,14 +15,14 @@ const Task = ({ task, handleTaskClick, handleDeleteTask }) => {
       <div
         className={styles.task}
         style={
-          task.state
+          task.approved
             ? { borderLeft: "4px solid chartreuse" }
             : { borderRight: "4px solid  red" }
         }
         onClick={() => handleTaskClick(task.id)}
       >
         {/*titulo da tarefa concertado o overflow das frases, cgicons react*/}
-        <div className={styles.title}>{task.title}</div>
+        <div className={styles.name}>{task.name}</div>
         <CgInfo className={styles.buttonInfo} onClick={handleClickTaskInfo} />
         <CgClose
           className={styles.buttonClose}

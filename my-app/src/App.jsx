@@ -5,25 +5,27 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import TasksInfo from "./components/TasksInfo";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-const reqApi = async () => {
-  const fetchNodeApi = await fetch('http://15.228.185.140:3333/person/people')
-  const fetchNodeApiJson = await fetchNodeApi.json()
-  setTasks(...tesks, fetchNodeApiJson)
-}
-reqApi()
+
 
 function App() {
-  const [tasks, setTasks] = useState([
-    { id: uuidv4(), title: "Task1", state: false },
-    { id: uuidv4(), title: "Task2", state: false },
-    { id: uuidv4(), title: "Task3", state: false },
-    { id: uuidv4(), title: "Task4", state: false },
-    { id: uuidv4(), title: "Task5", state: false },
-  ]);
+  const [tasks, setTasks] = useState([]);
+
+
+useEffect(() => {
+    const reqApi = async () => {
+      const fetchNodeApi = await fetch('http://15.228.185.140:3333/person/people')
+      const fetchNodeApiJson = await fetchNodeApi.json()
+      setTasks(fetchNodeApiJson)
+    }
+    reqApi()
+    return () => {
+    };
+}, []);
+
   //essa é a função passada como props para o AddTask.
   //ela recebe o parametro taskTitle para injetar o titulo no useState tasks.
   const handleTaskAddition = (taskTitle) => {
@@ -31,9 +33,10 @@ function App() {
     const newTasks = [
       ...tasks,
       {
-        id: uuidv4(),
-        title: taskTitle,
-        state: false,
+        _id: uuidv4(),
+        name: taskTitle,
+        salary: 0,
+        approved: false,
       },
     ];
     //chamando setTasks(newTasks) estamos empurrando o novo valor de um array para o state de tasks.
