@@ -1,15 +1,12 @@
 import Task from "./Task";
 
-const Tasks = ({ tasks, handleTaskClick, handleDeleteTask }) => {
- console.log(tasks)
+const Tasks = ({ tasks }) => {
   return (
     <div>
       {tasks.map((task) => (
         <Task
           key={task._id}
           task={task}
-          handleTaskClick={handleTaskClick}
-          handleDeleteTask={handleDeleteTask}
           />
           ))
         }

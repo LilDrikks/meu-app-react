@@ -4,50 +4,29 @@ import Container from "./components/Container";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import TasksInfo from "./components/TasksInfo";
+import UserContext from "./contexts/UserContext";
+import api from "./services/api";
 
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-
-
 function App() {
   const [tasks, setTasks] = useState([]);
-
+  const [userData , setUserData] = useState({})
 
 useEffect(() => {
-    const reqApi = async () => {
-      const fetchNodeApi = await fetch('http://15.228.185.140:3333/person/people')
-      const fetchNodeApiJson = await fetchNodeApi.json()
-      setTasks(fetchNodeApiJson)
-    }
-    reqApi()
-    return () => {
-    };
-}, []);
-useEffect(() => {
-  const reqApi = async () => {
-    const requestOptions = {
-      method: 'POST',
-      headers:{ 
-        'Content-Type': 'application/json',
-        'Authorization': '5fd1be56-a21a-4c91-aa31-a9428c0e2d6f',
-        'My-Custom-Header': 'foobar'
-    },
-      body: { "name": "Rodrigo", "salary": 0, "approved": true }
-    }
-    const fetchNodeApi = await fetch('http://15.228.185.140:3333/person', requestOptions)
-    const fetchNodeApiJson = await fetchNodeApi.json()
-    console.log(fetchNodeApiJson)
-  }
-  reqApi()
-  return () => {
-  };
+  api.get('people').then(({data})=>{
+    setTasks(data)
+  })
+  //eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
   //essa é a função passada como props para o AddTask.
   //ela recebe o parametro taskTitle para injetar o titulo no useState tasks.
   const handleTaskAddition = (taskTitle) => {
+    
+    console.log(taskTitle)
     //aqui a variavel newTask recebe o array de tasks mais o novo objeto com seus valores.
     const newTasks = [
       ...tasks,
@@ -60,10 +39,20 @@ useEffect(() => {
     ];
     //chamando setTasks(newTasks) estamos empurrando o novo valor de um array para o state de tasks.
     setTasks(newTasks);
+    console.log(tasks)
+    api.post('/',{
+      "name": `${taskTitle}`,
+      "salary": 3900,
+      "approved": true
+  }).then((res)=>{
+      console.log(res)  
+    }).catch((res)=>{
+      console.log(res)})
   };
 
   //Função para apagar um item do tasks que recebe taskId vindo do botão em Task que recebe a prop task especifica para ser removida.
   const handleDeleteTask = (taskId) => {
+    console.log(taskId)
     //busca no tasks o index do item taskId e aramazena na constante index.
     const index = tasks.indexOf(taskId);
     //condição se index for verdadeiro em uma array.
@@ -72,6 +61,9 @@ useEffect(() => {
       const newTasks = tasks.splice(index, 1);
       //setando newTasks ao useState de tasks.
       setTasks(newTasks);
+      api.delete(`/delete/${taskId._id}`).then(({data})=>{
+        console.log(data)
+      })
     }
   };
 
@@ -80,7 +72,7 @@ useEffect(() => {
     //chama um map no useSate tasks mapeando cada item e adicinando condicionalmente em um novo array.
     const newTasks = tasks.map((task) => {
       //condição que verifica o id do item clicado e altera sua propriedade state para o valor contrario false/true true/false.
-      if (task.id === taskId) return { ...task, state: !task.state };
+      if (task._id === taskId) return { ...task, approved: !task.approved };
       //caso o valor do id não seja encontrado no array tasks ira retornar task normal sem alteração e não execulta a linha de baixo.
       return task;
     });
@@ -89,8 +81,34 @@ useEffect(() => {
     setTasks(newTasks);
   };
 
+
+   //useState do titulo da tarefa em vem do input
+   const [inputData, setInputData] = useState("");
+   //a função que irá adicionar a tarefa recebe outra função
+   const handleClickAddTask = () => {
+    if (inputData === "") {
+      return;
+    }
+
+    //essa outra função por sua vez vem como propriedade do App
+    //e passa o parametro do useState inputData(valor que esta no input)
+    handleTaskAddition(inputData);
+    //limpando o input apois o click pois o value é o mesmo que o inputData
+    setInputData("");
+  };
+
   return (
-    <div className="App">
+    <UserContext.Provider value={{
+      tasks,
+      handleTaskClick,
+      handleDeleteTask,
+      handleClickAddTask,
+      inputData,
+      setInputData,
+      setUserData,
+      userData
+      }}>
+      <div className="App">
       <Container>
         <Header />
         {/*BrowserRouter é o component que rodeia a aplicação dando lugar parar as routes existentes.*/}
@@ -105,19 +123,17 @@ useEffect(() => {
               path="/"
               element={
                 <Home
-                  handleTaskClick={handleTaskClick}
-                  handleDeleteTask={handleDeleteTask}
-                  handleTaskAddition={handleTaskAddition}
                   tasks={tasks}
                 />
               }
             />
             {/*Route com o path passando um paramêtro de Url que será o mesmo nome da task que virá de task pelo useNavigate. */}
-            <Route exact path="tasks/:taskTitle" element={<TasksInfo />} />
+            <Route exact path="tasks/:taskTitle/:_id" element={<TasksInfo />} />
           </Routes>
         </BrowserRouter>
       </Container>
-    </div>
+      </div>
+    </UserContext.Provider>
   );
 }
 export default App;

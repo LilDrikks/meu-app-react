@@ -12,7 +12,6 @@
 .title {
   text-align: left;
   width: 60%;
-  flex: 4;
   word-wrap: break-word;
   padding-right: 50px;
 }

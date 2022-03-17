@@ -1,21 +1,20 @@
 import AddTask from "./AddTask";
 import Tasks from "./Tasks";
+import { useContext } from "react";
 
-const Home = ({
-  handleDeleteTask,
-  handleTaskAddition,
-  handleTaskClick,
-  tasks,
-}) => {
+import UserContext from '../contexts/UserContext'
+const Home = () => {
+  const dados = useContext(UserContext)
+
   return (
     <>
       {/* passando uma props valor função para o component AddTask*/}
-      <AddTask handleTaskAddition={handleTaskAddition} />
+      <AddTask handleTaskAddition={dados.handleTaskAddition} />
       {/* passando uma props valor useState para o component Tasks*/}
       <Tasks
-        tasks={tasks}
-        handleTaskClick={handleTaskClick}
-        handleDeleteTask={handleDeleteTask}
+        tasks={dados.tasks}
+        handleTaskClick={dados.handleTaskClick}
+        handleDeleteTask={dados.handleDeleteTask}
       />
     </>
   );

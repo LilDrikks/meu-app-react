@@ -2,8 +2,12 @@ import styles from "./TasksInfo.module.css";
 
 import { Link, useParams } from "react-router-dom";
 import AddTaskButton from "./AddTaskButton";
+import { useContext } from "react";
+import UserContext from "../contexts/UserContext";
 
 const TasksInfo = () => {
+  const dados = useContext(UserContext)
+  console.log(dados)
   //Variável params que recebe o valor de useParems que esta na Url
   const params = useParams();
   return (
@@ -20,8 +24,10 @@ const TasksInfo = () => {
                                 */}
         <h2>{params.taskTitle}</h2>
         <p>
-          lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-          lorem lorem lorem lorem
+          Sálario: {dados.userData.salary}
+        </p>
+        <p>
+          Aprovação: {String(dados.userData.approved)}
         </p>
       </div>
     </>
